@@ -1,18 +1,40 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div>
+        <Header/>
+        <slider msg="NEW ARRIVAL"/>
+        <Collections/>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
-}
+/**************************************
+                IMPORTS
+**************************************/
+import router from '../router';
+import Header from '../components/Header';
+import Collections from '../components/Collections';
+import slider from '../components/slider';
+import Featured from '../components/Featured';
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
+/**************************************
+                SCRIPTS
+**************************************/
+    export default {
+        name: 'Home',
+        components: {
+            Header,
+            Collections,
+            slider,
+            Featured
+        },
+        computed: {
+            ...mapGetters([])
+        },
+        methods: {
+            ...mapActions([])
+        },
+    }
 </script>
+
+<style lang='scss' scoped>
+</style>
