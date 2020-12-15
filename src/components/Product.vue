@@ -81,7 +81,10 @@
         <h2 v-if="productcolors.length > 0" class="Product-Mobile__Info--color">
           color
         </h2>
-        <div v-if="productcolors.length > 0" class="Product-Mobile__Info--colors">
+        <div
+          v-if="productcolors.length > 0"
+          class="Product-Mobile__Info--colors"
+        >
           <div
             @click="SelectColor(color)"
             v-for="color in productcolors"
@@ -119,33 +122,41 @@ export default {
         this.selectedSize = undefined;
       }, 1);
     },
-    VariantsLog() {
+    VariantsLoop() {
       for (let i = 0; i < this.product.variants.edges.length; i++) {
         // Loops through all the possible VARIENTS
+        let Price = this.product.variants.edges[i].node.priceV2.amount;
+        this.CurrentVariantPrice = Price;
         let variants = this.product.variants.edges[i].node.selectedOptions; //Declares the CURRENT VARIANT data in a variable
-
-        for (let i = 0; i < variants.length; i++) {
-          // Loops through all the possible VARIENTS OPTIONS
-
-          if (variants[i].value !== "Default Title") {
-            //Checks if the PRODUCT contains more than one VARIENT OPTION
+        let ID = this.product.variants.edges[i].node.id;  //Declares the CURRENT VARIANT ID in a variable
+        this.CurrentVariantID = ID;
+        for (let i = 0; i < variants.length; i++) { // Loops through all the possible VARIENTS OPTIONS
+          if (variants[i].value !== "Default Title") {  //Checks if the PRODUCT contains more than one VARIENT OPTION
             this.gotVariants = true; // If the PRODUCT got more than the default variant sets gotVariants to TRUE
             if (variants[i].name === "Size") {
-              if (this.productsizes.includes(variants[i].value)) {
-                //Checks if productsizes already has the CURRENT SIZE
+              let Size = variants[i].value;
+              this.CurrentVariantSize = Size;
+              if (this.productsizes.includes(variants[i].value)) {  //Checks if productsizes already has the CURRENT SIZE
               } else {
                 this.productsizes.push(variants[i].value); //If productsizes does not has the CURRENT SIZE adds it to the array
               }
             }
             if (variants[i].name === "Color") {
-              if (this.productcolors.includes(variants[i].value)) {
-                //Checks if productcolors already has the CURRENT COLOR
+              let Color = variants[i].value;
+              this.CurrentVariantColor = Color;
+              if (this.productcolors.includes(variants[i].value)) { //Checks if productcolors already has the CURRENT COLOR
               } else {
                 this.productcolors.push(variants[i].value); //If productcolors does not has the CURRENT COLOR adds it to the array
               }
             }
           }
         }
+        this.productVariants.push({
+          ID: this.CurrentVariantID,
+          Size: this.CurrentVariantSize,
+          Color: this.CurrentVariantColor,
+          Price: this.CurrentVariantPrice
+        })
       }
     },
     SelectSize(size) {
@@ -162,20 +173,22 @@ export default {
       ) {
         console.log("Please select size and color");
       } else {
-        console.log(this.product.id);
-        console.log(this.selectedColor);
-        console.log(this.selectedSize);
-        console.log(this.productQuantity);
+        for(let i = 0; i < this.productVariants.length; i++){
 
-        this.AddItemsTocart({
-          id: this.product.id,
-          title: this.product.title,
-          image: this.MainImg,
-          price: this.ProductMaxPrice,
-          quantity: this.productQuantity,
-          color: this.selectedColor,
-          size: this.selectedSize,
-        });
+          if(this.productVariants[i].Size === this.selectedSize && this.productVariants[i].Color === this.selectedColor){
+
+            this.AddItemsTocart({
+              id: this.productVariants[i].ID,
+              title: this.product.title,
+              image: this.MainImg,
+              price: this.productVariants[i].Price,
+              quantity: this.productQuantity,
+              color: this.selectedColor,
+              size: this.selectedSize,
+            });
+          }
+        }
+        
 
         this.ShowNotification().then(() => {
           gsap.from(".Notification", {
@@ -194,14 +207,14 @@ export default {
       return style;
     },
     MobileAddToCart() {
-        this.overlay = true;
-        setTimeout(() => {
-            gsap.to('.Product-Mobile', {
-                y: 0,
-                duration: .2
-            })
-        }, 1);
-    }
+      this.overlay = true;
+      setTimeout(() => {
+        gsap.to(".Product-Mobile", {
+          y: 0,
+          duration: 0.2,
+        });
+      }, 1);
+    },
   },
   data() {
     return {
@@ -210,8 +223,13 @@ export default {
       gotVariants: false,
       productcolors: [],
       productsizes: [],
+      productVariants: [],
       selectedColor: undefined,
       selectedSize: undefined,
+      CurrentVariantID: undefined,
+      CurrentVariantPrice: undefined,
+      CurrentVariantSize: undefined,
+      CurrentVariantColor: undefined
     };
   },
   computed: {
@@ -223,7 +241,7 @@ export default {
     },
   },
   mounted() {
-    this.VariantsLog();
+    this.VariantsLoop();
   },
 };
 </script>
@@ -418,7 +436,7 @@ export default {
     @include respond(phone) {
       display: block;
     }
-    &__Info{
+    &__Info {
       height: 100%;
       width: 100%;
       position: relative;
@@ -557,3 +575,86 @@ export default {
   }
 }
 </style>
+Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNzY2NDA4MzI4MDA2MQ==
+Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNzY2NDA4MzI4MDA2MQ==
+
+
+          "variants": {
+              "edges": [
+                  {
+                      "node": {
+                          "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNzY2NDQ4MDY5MDM2NQ==",
+                          "title": "9",
+                          "priceV2": {
+                              "amount": "5500.0"
+                          },
+                          "selectedOptions": [
+                              {
+                                  "name": "Size",
+                                  "value": "9"
+                              }
+                          ]
+                      }
+                  },
+                  {
+                      "node": {
+                          "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNzY2NDQ4MDcyMzEzMw==",
+                          "title": "9.5",
+                          "priceV2": {
+                              "amount": "5500.0"
+                          },
+                          "selectedOptions": [
+                              {
+                                  "name": "Size",
+                                  "value": "9.5"
+                              }
+                          ]
+                      }
+                  },
+                  {
+                      "node": {
+                          "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNzY2NDQ4MDc1NTkwMQ==",
+                          "title": "10",
+                          "priceV2": {
+                              "amount": "5500.0"
+                          },
+                          "selectedOptions": [
+                              {
+                                  "name": "Size",
+                                  "value": "10"
+                              }
+                          ]
+                      }
+                  },
+                  {
+                      "node": {
+                          "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNzY2NDQ4MDc4ODY2OQ==",
+                          "title": "10.5",
+                          "priceV2": {
+                              "amount": "5500.0"
+                          },
+                          "selectedOptions": [
+                              {
+                                  "name": "Size",
+                                  "value": "10.5"
+                              }
+                          ]
+                      }
+                  },
+                  {
+                      "node": {
+                          "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNzY2NDQ4MDgyMTQzNw==",
+                          "title": "11",
+                          "priceV2": {
+                              "amount": "5500.0"
+                          },
+                          "selectedOptions": [
+                              {
+                                  "name": "Size",
+                                  "value": "11"
+                              }
+                          ]
+                      }
+                  }
+              ]
+          }

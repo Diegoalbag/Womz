@@ -46,6 +46,9 @@ const GET_FALL_PRODUCTS = gql`
             node {
               id
               title
+              priceV2{
+                  amount
+              }
               selectedOptions {
                 name
                 value

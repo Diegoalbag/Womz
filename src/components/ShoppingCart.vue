@@ -102,15 +102,15 @@ import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
         max-height: 54rem;
         overflow-y: scroll;
     }
-    &::after{
-        content: "";
-            display: block;
-            height: 40%;
-            width: 20%;
-            position: absolute;
-            top: -5rem;
-            right: -2rem;
-            z-index: 0;
-    }
+    // &::after{
+    //     content: "";
+    //         display: block;
+    //         height: 40%;
+    //         width: 20%;
+    //         position: absolute;
+    //         top: -5rem;
+    //         right: -2rem;
+    //         z-index: 0;
+    // }
 }
 </style>
