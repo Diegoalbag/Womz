@@ -113,7 +113,7 @@ export default {
   name: "product",
   props: ["product"],
   methods: {
-    ...mapActions(["AddItemsTocart", "ShowNotification"]),
+    ...mapActions(["AddItemsTocart", "ShowNotificationadded", "ShowNotificationSelect"]),
     InfoActive() {
       setTimeout(() => {
         this.overlay = false;
@@ -171,7 +171,13 @@ export default {
         this.selectedColor === undefined &&
         this.selectedSize === undefined
       ) {
-        console.log("Please select size and color");
+        this.ShowNotificationSelect().then(() => {
+          gsap.from(".Notification", {
+            y: -300,
+            duration: 0.5,
+          });
+        });
+
       } else {
         for(let i = 0; i < this.productVariants.length; i++){
 
@@ -188,9 +194,7 @@ export default {
             });
           }
         }
-        
-
-        this.ShowNotification().then(() => {
+        this.ShowNotificationadded().then(() => {
           gsap.from(".Notification", {
             y: -300,
             duration: 0.5,

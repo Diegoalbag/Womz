@@ -1,23 +1,37 @@
 const state = {
-    Showing: false
+    Showingadded: false,
+    ShowingSelect: false,
 };
 const getters = {
-    IsShowing: (state) => {
-        return !!state.Showing;
+    IsShowingAdded: (state) => {
+        return !!state.Showingadded;
+    },
+    IsShowingSelect: (state) => {
+        return !!state.ShowingSelect;
     },
 };
 const actions = {
-    ShowNotification: ({commit}, state) => {
-        commit('ShowNotification');
+    ShowNotificationadded: ({commit}, state) => {
+        commit('ShowNotificationadded');
     },
+    ShowNotificationSelect: ({commit}, state) => {
+        commit('ShowNotificationSelect');
+    },
+
 };
 const mutations = {
-    ShowNotification: (state) => {
-        state.Showing = true;
-
+    ShowNotificationadded: (state) => {
+        state.Showingadded = true;
         setTimeout(() => {
-            state.Showing = false
-        }, 5000);
+            state.Showingadded = false
+        }, 2000);
+
+    },
+    ShowNotificationSelect: (state) => {
+        state.ShowingSelect = true;
+        setTimeout(() => {
+            state.ShowingSelect = false
+        }, 2000);
 
     }
 };
