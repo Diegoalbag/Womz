@@ -1,4 +1,7 @@
 # womz
+Shopify Store concept with an innovative design. It communicates to the shopify API via GraphQL using Vue-Apollo Client. 
+
+IN PROGRESS...
 
 ## Project setup
 ```
