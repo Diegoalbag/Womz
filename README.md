@@ -3,6 +3,8 @@ Shopify Store concept with an innovative design. It communicates to the shopify 
 
 IN PROGRESS...
 
+Check it out https://womz-4732c.firebaseapp.com
+
 ## Project setup
 ```
 npm install
